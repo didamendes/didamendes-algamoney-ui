@@ -1,9 +1,9 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-
-import { Pessoa } from '../../core/model';
 import { FormControl } from '@angular/forms';
+
+import { Pessoa, Contato } from '../../core/model';
 import { PessoaService } from '../pessoa.service';
 import { ToastyService } from 'ng2-toasty';
 import { ErrorHandlerService } from '../../core/error-handler.service';
@@ -16,6 +16,9 @@ import { ErrorHandlerService } from '../../core/error-handler.service';
 export class PessoasCadastroComponent implements OnInit {
 
    pessoa = new Pessoa();
+   estados: any[];
+   cidades: any[];
+   estadoSelecionado: number;
 
   constructor(
      private pessoaService: PessoaService,
@@ -31,10 +34,34 @@ export class PessoasCadastroComponent implements OnInit {
 
     this.title.setTitle('Nova Pessoa');
 
+    this.carregarEstados();
+
     if (codigoPessoa) {
       this.carregarPessoa(codigoPessoa);
     }
 
+  }
+
+  carregarCidades() {
+    this.pessoaService.pesquisarCidades(this.estadoSelecionado)
+      .then(lista => {
+        this.cidades = lista.map(c => ({
+          label: c.nome,
+          value: c.codigo
+        }));
+      })
+      .catch(erro => this.errorHandle.handle(erro));
+  }
+
+  carregarEstados() {
+    this.pessoaService.listarEstados()
+      .then(lista => {
+        this.estados = lista.map(uf => ({
+          label: uf.nome,
+          value: uf.codigo
+        }));
+      })
+      .catch(erro => this.errorHandle.handle(erro));
   }
 
   get editando() {
@@ -45,6 +72,14 @@ export class PessoasCadastroComponent implements OnInit {
     this.pessoaService.buscarPeloCodigo(codigo)
       .then(pessoa => {
         this.pessoa = pessoa;
+
+        this.estadoSelecionado = (this.pessoa.endereco.cidade) ?
+                          this.pessoa.endereco.cidade.estado.codigo : null;
+
+        if (this.estadoSelecionado) {
+          this.carregarCidades();
+        }
+
         this.atualizarTituloPessoa();
       })
       .catch(erro => this.errorHandle.handle(erro));

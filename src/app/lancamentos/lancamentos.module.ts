@@ -1,27 +1,30 @@
-import { LancamentoRoutingModule } from './lancamento-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CurrencyMaskModule } from 'ng2-currency-mask';
-import { InputTextModule } from 'primeng/components/inputtext/inputtext';
-import { ButtonModule } from 'primeng/components/button/button';
-import { TableModule } from 'primeng/components/table/table';
-import { TooltipModule } from 'primeng/components/tooltip/tooltip';
-import { InputTextareaModule } from 'primeng/components/inputtextarea/inputtextarea';
-import { CalendarModule } from 'primeng/components/calendar/calendar';
-import { SelectButtonModule } from 'primeng/components/selectbutton/selectbutton';
-import { DropdownModule } from 'primeng/components/dropdown/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
+import { TooltipModule } from 'primeng/tooltip';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CalendarModule } from 'primeng/calendar';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
 import { LancamentosCadastroComponent } from './lancamentos-cadastro/lancamentos-cadastro.component';
-import { FormsModule } from '@angular/forms';
+import { LancamentoRoutingModule } from './lancamento-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
 
     InputTextModule,
     ButtonModule,
@@ -32,6 +35,8 @@ import { SharedModule } from '../shared/shared.module';
     SelectButtonModule,
     DropdownModule,
     CurrencyMaskModule,
+    FileUploadModule,
+    ProgressSpinnerModule,
 
     SharedModule,
     LancamentoRoutingModule

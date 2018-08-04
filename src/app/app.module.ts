@@ -10,8 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { PessoasModule } from './pessoas/pessoas.module';
-import { LancamentosModule } from './lancamentos/lancamentos.module';
 
 
 @NgModule({
@@ -23,8 +21,6 @@ import { LancamentosModule } from './lancamentos/lancamentos.module';
     BrowserAnimationsModule,
     HttpModule,
 
-    LancamentosModule,
-    PessoasModule,
     CoreModule,
     SegurancaModule,
 
